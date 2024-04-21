@@ -1,0 +1,108 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Chatbot</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/head.css">
+    <link rel="stylesheet" href="/css/foot.css">
+</head>
+
+<body>
+    <%- include("includes/header.ejs") %>
+<% if (isAuth ) { %>
+<section class="chat-container">
+    <div id="chat">
+        <div id="chat-header">
+            <img src="/image/user.png" id="user-picture" alt="User Picture">
+            <h2 id="user-name"><%= username %></h2>
+        </div>
+        <div id="messages">
+            <% chats.forEach(message => { %>
+                <div class="message">
+                    <% if (message.role === 'user') { %>
+                        <p class="user-bubble"><%= message.content %></p>
+                    <% } else { %>
+                        <p class="bot-bubble"><%= message.content %></p>
+                    <% } %>
+                </div>
+            <% }); %>
+        </div> <!-- Close messages div -->
+        <div id="bufferAnimation" class="buffer-animation" style="display: none;"></div>
+        <div id="chat_footer">
+            <form id="messageForm">
+                <input type="text" id="messageInput" placeholder="Type your message...">
+                <button type="submit" id="sendButton">Send</button>
+                <button type="button" id="clearButton">Clear</button>
+            </form>
+        
+    </div>
+        
+        
+    </div>
+</section>
+<% } else { %>
+<section class="auth-container">
+    <div id="auth">
+        <h2>Please sign up or log in to use the chatbot</h2>
+        <p>Don't have an account? Register now!</p>
+        <a href="/signup" class="auth-button">Sign Up</a>
+        <p>Already have an account? Log in now!</p>
+        <a href="/login" class="auth-button">Log In</a>
+    </div>
+</section>
+<% } %>
+<%- include("includes/footer.ejs", { year: year }) %>
+
+
+    <script>
+
+window.addEventListener('load', () => {
+            // Add event listener to clear button
+            document.getElementById('clearButton').addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/reset', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    // Handle response if needed
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+        // Prevent form submission when clear button is clicked
+        document.getElementById('clearButton').addEventListener('click', (event) => {
+            event.preventDefault();
+        });
+
+        document.getElementById('messageForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const messageInput = document.getElementById('messageInput').value;
+            if (messageInput.trim() !== '') {
+                const response = await fetch('/sendMessage', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: messageInput })
+                });
+                const data = await response.json();
+                document.getElementById('messages').innerHTML = '';
+                data.chats.forEach(message => {
+                    document.getElementById('messages').innerHTML += `<div class="message"><p class="${message.role}-bubble">${message.content}</p></div>`;
+                });
+                document.getElementById('messageInput').value = '';
+            }
+        });
+    </script>
+</body>
+
+</html>

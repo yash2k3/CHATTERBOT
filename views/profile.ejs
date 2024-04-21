@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Add any additional stylesheets here -->
+    <link rel="stylesheet" href="/css/head.css">
+    <link rel="stylesheet" href="/css/foot.css">
+    <style>
+        .profile-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .profile-info {
+            text-align: center;
+        }
+    
+        .profile-details {
+            margin-bottom: 20px;
+        }
+    
+        .profile-details p {
+            margin: 5px 0;
+        }
+    
+        #editButton {
+            background-color: #1a39ec;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        #editButton:hover {
+            background-color: #1532b5;
+        }
+    
+        #editForm {
+            margin-top: 20px;
+        }
+    
+        #editForm label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        #editForm input[type="text"],
+        #editForm input[type="email"],
+        #editForm input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    
+        #editForm button {
+            background-color: #1a39ec;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        #editForm button:hover {
+            background-color: #1532b5;
+        }
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    #auth {
+    text-align: center;
+}
+
+#auth h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 20px; /* Add top margin */
+}
+
+#auth p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 10px; /* Add top margin */
+}
+
+#auth a.auth-button {
+    background-color: #1a39ec;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-top: 10px; /* Add top margin */
+    margin-bottom: 10px; /* Add bottom margin */
+}
+
+#auth a.auth-button:hover {
+    background-color: #1532b5;
+}
+
+    </style>
+    
+</head>
+
+<body>
+    <!-- Header -->
+    <%- include("includes/header.ejs") %>
+
+    <!-- User Profile Content -->
+    <% if (isAuth) { %>
+        <section class="profile-container">
+            <div class="profile-info">
+                <h2>User Profile</h2>
+                <div class="profile-details">
+                    <p><strong>Name:</strong> <%= user.name %></p>
+                    <p><strong>Email:</strong> <%= user.email %></p>
+                    <p><strong>Password:</strong> ********</p> <!-- Display password as asterisks for security -->
+                </div>
+                <button id="editButton">Edit</button> <!-- Edit button -->
+                <!-- Edit form -->
+                <form id="editForm" style="display: none;" action="/updateProfile" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="<%= user.name %>"><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= user.email %>"><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter new password"><br>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </section>
+        <% } else { %>
+        <section class="auth-container">
+            <div id="auth">
+                <h2>Please sign up or log in to view your profile</h2>
+                <p>Don't have an account? Register now!</p>
+                <a href="/signup" class="auth-button">Sign Up</a>
+                <p>Already have an account? Log in now!</p>
+                <a href="/login" class="auth-button">Log In</a>
+            </div>
+        </section>
+        <% } %>
+        
+
+    <!-- Footer -->
+    <%- include("includes/footer.ejs", { year: year }) %>
+
+    <!-- JavaScript -->
+    <script>
+        const editButton = document.getElementById('editButton');
+        const editForm = document.getElementById('editForm');
+
+        editButton.addEventListener('click', () => {
+            editForm.style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

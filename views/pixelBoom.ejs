@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Boom</title>
+    <link rel="stylesheet" href="/css/head.css">
+    <link rel="stylesheet" href="/css/foot.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .pixelBoom-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #auth {
+            text-align: center;
+        }
+
+        #auth h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #auth p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #auth a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        #auth a:hover {
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include("includes/header.ejs") %>
+    <% if (isAuth) { %>
+        <section class="pixelBoom-container">
+            <div style="text-align: center;">
+                <h1 style="font-size: 36px; margin-bottom: 20px;">PixelBoom Bot will be available soon.</h1>
+                <p style="font-size: 18px; margin-bottom: 20px;">Explore ChatterBot till then</p>
+                <a href="/chatterBot" class="auth-button" style="display: block; width: fit-content; margin: 0 auto;">ChatterBot</a>
+            </div>
+        </section>
+        
+    <% } else { %>
+    <section class="auth-container pixelBoom-container"> <!-- Added pixelBoom-container class here -->
+        <div id="auth">
+            <h2>Please sign up or log in to use Pixel Boom</h2>
+            <p>Don't have an account? Register now!</p>
+            <a href="/signup" class="auth-button">Sign Up</a>
+            <p>Already have an account? Log in now!</p>
+            <a href="/login" class="auth-button">Log In</a>
+        </div>
+    </section>
+    <% } %>
+    <%- include("includes/footer.ejs", { year: year }) %>
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px; /* Adjust the width as desired */
+    height: 550px; /* Adjust the height as desired */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Aligns items with space between */
+    position: relative; /* Position relative to its container */
+}
+
+
+#messages {
+    flex: 1; /* Take remaining space */
+    overflow-y: auto; /* Add scroll bar */
+    max-height: 400px; /* Restrict the height */
+    padding: 0 10px; /* Add padding to the left and right */
+}
+
+
+.message {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.user-bubble {
+    background-color: #1a39ec; /* Pinkish red */
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    
+}
+
+.bot-bubble {
+    background-color: #f0f0f0; /* Light gray */
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    padding-top: 10px;
+}
+
+#chat-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#user-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#user-name {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+/* Style for the chat footer */
+#chat_footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 349px;
+    height: 29px;
+    background-color: #f0f0f0; /* Adjust as needed */
+    padding: 10px 20px; /* Adjust padding as needed */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Add a shadow at the bottom */
+}
+
+/* Style for the message input field */
+#messageInput {
+    flex: 1; /* Take remaining space */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style for the send button */
+#sendButton, #clearButton {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for the clear button */
+#clearButton {
+    background-color: #ff6347; /* Coral */
+    color: #fff;
+    margin-left: 31px;
+}
+
+/* Hover style for the clear button */
+#clearButton:hover {
+    background-color: #ff4d36; /* Darker coral on hover */
+}
+
+/* Style for the send button */
+#sendButton {
+    background-color: #1a39ec; /* Blue */
+    color: #fff;
+}
+
+/* Hover style for the send button */
+#sendButton:hover {
+    background-color: #0e2f94; /* Darker blue on hover */
+}
+
+
+
+
+
+/* CSS for auth-container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#auth {
+    text-align: center;
+}
+
+#auth h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#auth p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#auth a {
+    color: blue;
+    text-decoration: underline;
+}
+
+#auth a:hover {
+    color: darkblue;
+}
+
+#resetButton {
+    background-color: #ff6347; /* Coral */
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px; /* Adjust spacing as needed */
+}
+
+#resetButton:hover {
+    background-color: #ff4d36; /* Darker coral on hover */
+}
